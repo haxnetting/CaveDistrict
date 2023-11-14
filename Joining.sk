@@ -1,0 +1,10 @@
+on first join:
+    send player title "&6&lWelcome to &8&lStone District!" with subtitle "&e&lEnjoy your stay!" for 7 seconds
+    send player action bar "&e&lWelcome to &8&lStone District!"
+    set {multi::%player's uuid%} to 1
+    set {multixp::%player's uuid%} to 1
+    set {upgradepick::%player's uuid%} to 15
+    set {picklvl::%player's uuid%} to 1
+    set {xp::%player's uuid%} to 1
+    set {xptoav::%player's uuid%} to 25
+    give player unbreakable stone pickaxe named "&dMagic Pickaxe" of efficiency 1

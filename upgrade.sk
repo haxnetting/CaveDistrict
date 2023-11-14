@@ -1,0 +1,13 @@
+command /upgrade:
+    trigger:
+        if player's tool is stone pickaxe:
+            if {money::%player's uuid%} >= {upgradepick::%player's uuid%} * {picklvl::%player's uuid%}:
+                remove {upgradepick::%player's uuid%} * {picklvl::%player's uuid%} from {money::%player's uuid%}
+                add 1 to {picklvl::%player's uuid%}
+                send "&aYou have upgraded your pickaxe to level %{picklvl::%player's uuid%"
+                enchant player's tool to efficiency of {picklvl::%player's uuid%}
+                if {picklvl::%player's uuid%} is 5:
+                    add 1 to {multi::%player's uuid%}
+                    add 0.5 to {multixp::%player's uuid%}
+        else:
+            send "&cYou need to hold a pickaxe to upgrade it!"

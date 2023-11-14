@@ -1,0 +1,130 @@
+on break of stone or beacon:
+    clear drops
+    add 2 * {multi::%player's uuid%} to {money::%player's uuid%}
+    set event-block to black concrete
+    wait 3 seconds
+    if player's rank is "default":
+        chance 50% of:
+            set event-block to stone
+        chance 25% of:
+            set event-block to iron_ore
+        chance 15% of:
+            set event-block to gold_ore
+        chance 7% of:
+            set event-block to diamond_ore
+        chance 2.97% of:
+            set event-block to emerald_ore
+        chance 0.03% of:
+            set event-block to beacon
+on break of any concrete:
+    cancel event
+on break of beacon:
+    broadcast "&b&l%player% &aJust found a §x§F§F§0§0§0§0B§x§F§F§9§9§0§0E§x§9§9§F§F§0§0A§x§0§0§6§6§9§9C§x§3§C§0§0§9§BO§x§9§4§0§0§D§3N&4&l!"
+    clear drops
+    give beacon to player's inventory
+
+on break of iron_ore:
+    clear drops
+    set event-block to black concrete
+    add 4 * {multi::%player's uuid%} to {money::%player's uuid%}
+    send player action bar "&6You've found &6%event-block%"
+    wait 3 seconds
+    if player's rank is "default":
+        chance 50% of:
+            set event-block to stone
+        chance 25% of:
+            set event-block to iron_ore
+        chance 15% of:
+            set event-block to gold_ore
+        chance 7% of:
+            set event-block to diamond_ore
+        chance 2.97% of:
+            set event-block to emerald_ore
+        chance 0.03% of:
+            set event-block to beacon
+
+on break of gold_ore:
+    clear drops
+    set event-block to black concrete
+    add 6.5 * {multi::%player's uuid%} to {money::%player's uuid%}
+    send player action bar "&6You've found &6%event-block%"
+    wait 3 seconds
+    if player's rank is "default":
+        chance 50% of:
+            set event-block to stone
+        chance 25% of:
+            set event-block to iron_ore
+        chance 15% of:
+            set event-block to gold_ore
+        chance 7% of:
+            set event-block to diamond_ore
+        chance 2.97% of:
+            set event-block to emerald_ore
+        chance 0.03% of:
+            set event-block to beacon
+on break of diamond_ore:
+    clear drops
+    set event-block to black concrete
+    send player action bar "&6You've found &6%event-block%"
+    add 9 * {multi::%player's uuid%} to {money::%player's uuid%}
+    wait 3 seconds
+    if player's rank is "default":
+        chance 50% of:
+            set event-block to stone
+        chance 25% of:
+            set event-block to iron_ore
+        chance 15% of:
+            set event-block to gold_ore
+        chance 7% of:
+            set event-block to diamond_ore
+        chance 2.97% of:
+            set event-block to emerald_ore
+        chance 0.03% of:
+            set event-block to beacon
+on break of emerald_ore:
+    clear drops
+    send player action bar "&6You've found &6%event-block%"
+    set event-block to black concrete
+    add 11.5 * {multi::%player's uuid%} to {money::%player's uuid%}
+    wait 3 seconds
+    if player's rank is "default":
+        chance 50% of:
+            set event-block to stone
+        chance 25% of:
+            set event-block to iron_ore
+        chance 15% of:
+            set event-block to gold_ore
+        chance 7% of:
+            set event-block to diamond_ore
+        chance 2.97% of:
+            set event-block to emerald_ore
+        chance 0.03% of:
+            set event-block to beacon
+on mine of any ore, stone:
+    if player's rank is default:
+        chance 0.5% of:
+            console command "crate key give %player% common 1"
+            send "&aYou've found a &6Common Crate Key!"
+        chance 0.2% of:
+            console command "crate key give %player% uncommon 1"
+            send "&aYou've found a &6Uncommon Crate Key!"
+        chance 0.09% of:
+            console command "crate key give %player% rare 1"
+            send "&aYou've found a &6Rare Crate Key!"
+        chance 0.04% of:
+            console command "crate key give %player% epic 1"
+            send player title "&bKey!" with subtitle "&aYou've found a &6Epic Crate Key!"
+on mine of any ore, stone:
+    set {plupg::%player's uuid%} to {xptoav::%player's uuid%} * {picklvl::%player's uuid%}
+    set {reqxp::%player's uuid%} to {reqxp::%player's uuid%} * {lvl::%player's uuid%}
+    send player action bar "&e%{money::%player's uuid%}% &4/ &e%{plupg::%player's uuid%}% &1&l| &3%{xp::%player's uuid%}%&4&l / &3%{reqxp::%player's uuid%}%"
+    if player's rank is "default":  
+        add 2 * {multixp::%player's uuid%} to {xp::%player's uuid%}
+    if {xp::%player's uuid%} = {reqxp::%player's uuid%}:
+        add 1 to {lvl::%player's uuid%}
+        set {xp::%player's uuid%} to 0
+        set {reqxp::%player's uuid%} to {xptoav::%player's uuid%} * 1.5
+        send "&aYou've leveled up to &6%{lvl::%player's uuid%}%!"
+        add 0.4 to {multi::%player's uuid%}
+        add 0.2 to {multixp::%player's uuid%}
+        add 110 * {lvl::%player's uuid%} + 210 to {money::%player's uuid%}
